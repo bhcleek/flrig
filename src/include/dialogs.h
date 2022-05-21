@@ -35,4 +35,29 @@ extern Font_Browser     *fntbrowser;
 
 extern void init_port_combos();
 
+extern bool editing;
+
+extern void sort_by_call();
+extern void sort_by_datetime();
+extern void sort_by_nbr();
+extern void sort_by_freq();
+
+extern void clear_qso();
+extern void save_qso();
+
+extern void edit_entry();
+extern void delete_entry();
+extern void view_log();
+
+extern void log_close();
+extern void log_open();
+extern void log_new();
+
+extern void log_load();
+extern void log_save();
+extern void log_save_as();
+
+extern void log_export_adif();
+extern void log_import_adif();
+
 #endif // __DIALOGS_H__

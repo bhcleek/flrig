@@ -448,8 +448,41 @@ void add_cwio(std::string txt)
 {
 	if (!cwio_thread_running) return;
 
+// expand special character pairs
+	size_t p;
+	while (((p = txt.find("~C")) != std::string::npos) || ((p = txt.find("~c")) != std::string::npos))
+		txt.replace(p, 2, qso_op_call->value());
+	while (((p = txt.find("~N")) != std::string::npos) || ((p = txt.find("~n")) != std::string::npos))
+		txt.replace(p, 2, qso_op_name->value());
+	while (((p = txt.find("~R")) != std::string::npos) || ((p = txt.find("~r")) != std::string::npos))
+		txt.replace(p, 2, qso_rst_out->value());
+	while ((p = txt.find("~#")) != std::string::npos) {
+		char sznum[10];
+		if (log_menu_leading_zeros->value())
+			snprintf(sznum, sizeof(sznum), "%0d", (int)(qso_nbr->value()));
+		else
+			snprintf(sznum, sizeof(sznum), "%d", (int)(qso_nbr->value()));
+		if (log_menu_cut_numbers->value()) {
+			for (size_t i = 1; i < strlen(sznum); i++) {
+				if (sznum[i] == '0') sznum[i] = 'T';
+				if (sznum[i] == '9') sznum[i] = 'N';
+			}
+		}
+		txt.replace(p, 2, sznum);
+	}
+	while ((p = txt.find("~+")) != std::string::npos) {
+		txt.replace(p, 2, "");
+		qso_nbr->value(qso_nbr->value() + 1);
+	}
+	while ((p = txt.find("~-")) != std::string::npos) {
+		txt.replace(p, 2, "");
+		qso_nbr->value(qso_nbr->value() - 1);
+		if (qso_nbr->value() < 0) qso_nbr->value(0);
+	}
+
 	new_text = txt_to_send->value();
 	new_text.append(txt);
+
 	txt_to_send->value(new_text.c_str());
 	txt_to_send->redraw();
 	if (txt[0] == '[') {
