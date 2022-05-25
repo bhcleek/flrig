@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0308
 i18n_type 1
 i18n_include "gettext.h"
 i18n_function _
@@ -401,7 +401,7 @@ progStatus.FSK_SHARED = FSK_USES_FSK;}
   btn_fskioSHARED->activate();
   select_fskioPORT->activate();
 }}
-        tooltip {Use DTR/RTS on CAT serial port} xywh {111 15 23 15} down_box DOWN_BOX align 4
+        tooltip {Use DTR/RTS on CAT serial port} xywh {87 15 23 15} down_box DOWN_BOX align 4
         code0 {o->value(progStatus.FSK_SHARED == FSK_USES_CAT);}
       }
       Fl_Check_Button btn_fskioAUX {
@@ -422,7 +422,7 @@ progStatus.FSK_SHARED = FSK_USES_FSK;}
   btn_fskioSHARED->activate();
   select_fskioPORT->activate();
 }}
-        tooltip {Use DTR/RTS on Auxiliary serial port} xywh {112 46 23 15} down_box DOWN_BOX align 4
+        tooltip {Use DTR/RTS on Auxiliary serial port} xywh {88 46 23 15} down_box DOWN_BOX align 4
         code0 {o->value(progStatus.FSK_SHARED == FSK_USES_AUX);}
       }
       Fl_Check_Button btn_fskioSEP {
@@ -443,7 +443,7 @@ progStatus.FSK_SHARED = FSK_USES_FSK;}
   btn_fskioSHARED->activate();
   select_fskioPORT->activate();
 }}
-        tooltip {Use DTR/RTS Separate serial port} xywh {245 15 23 15} down_box DOWN_BOX align 4
+        tooltip {Use DTR/RTS Separate serial port} xywh {212 15 23 15} down_box DOWN_BOX align 4
         code0 {o->value(progStatus.FSK_SHARED == FSK_USES_SEP);}
       }
       Fl_Check_Button btn_fskioSHARED {
@@ -464,21 +464,21 @@ progStatus.FSK_SHARED = FSK_USES_FSK;}
   btn_fskioSHARED->activate();
   select_fskioPORT->activate();
 }}
-        tooltip {Use DTR/RTS cwio shared port} xywh {245 46 23 15} down_box DOWN_BOX align 4
+        tooltip {Use DTR/RTS cwio shared port} xywh {212 46 23 15} down_box DOWN_BOX align 4
         code0 {o->value(progStatus.FSK_SHARED == FSK_USES_CWIO);}
       }
       Fl_Check_Button btn_fskioINVERTED {
         label Inverted
         callback {progStatus.FSK_INVERTED = o->value();}
         tooltip {DTR/RTS signaling is inverted
-(-) keying} xywh {376 15 23 15} down_box DOWN_BOX align 4
+(-) keying} xywh {339 15 23 15} down_box DOWN_BOX align 4
         code0 {o->value(progStatus.FSK_INVERTED);}
       }
       Fl_Check_Button btn_fskioSTOPBITS {
         label {1.5 stop bits}
         callback {progStatus.FSK_STOPBITS = o->value();}
         tooltip {Enabled - 1.5 stop bits
-Disable - 2 stop bits} xywh {376 46 23 15} down_box DOWN_BOX align 4
+Disable - 2 stop bits} xywh {339 46 23 15} down_box DOWN_BOX align 4
         code0 {o->value(progStatus.FSK_STOPBITS);}
       }
       Fl_Group listbox_fskioKEYLINE {
@@ -496,6 +496,12 @@ Disable - 2 stop bits} xywh {376 46 23 15} down_box DOWN_BOX align 4
         tooltip {PTT delay before keydown
 0 = Break-in} xywh {608 10 50 25} minimum 0 value 0
         code0 {o->value(progStatus.FSK_PTT);}
+      }
+      Fl_Counter fsk_idles {
+        label {Start Idles}
+        callback {progStatus.fsk_idles = o->value();}
+        tooltip {Transmit \# <LTRS> after PTT on} xywh {400 11 80 21} type Simple minimum 0 maximum 20 step 1
+        code0 {o->value(progStatus.fsk_idles);}
       }
     }
   }

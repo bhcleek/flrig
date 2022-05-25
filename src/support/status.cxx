@@ -557,6 +557,7 @@ status progStatus = {
 	0,			// int		FSK_CONNECTED; 1 - connected state; 0 - unconnected state
 	0,			// int		FSK_INVERTED; reverse keying; 
 	1,			// int		FSK_STOPBITS; 1 - 1.5; 0 - 2
+	8,			// int		fsk_idles
 	"",			// std::string	FSK_PORT;
 
 	"","","","","","",
@@ -1191,6 +1192,7 @@ void status::saveLastState()
 	spref.set("FSK_CONNECTED", FSK_CONNECTED);
 	spref.set("FSK_INVERTED", FSK_INVERTED);
 	spref.set("FSK_STOPBITS", FSK_STOPBITS);
+	spref.set("FSK_IDLES", fsk_idles);
 	spref.set("FSK_PORT", FSK_PORT.c_str());
 
 	for (int n = 0; n < 12; n++) {
@@ -1964,6 +1966,7 @@ bool status::loadXcvrState(std::string xcvr)
 		spref.get("FSK_CONNECTED", FSK_CONNECTED, FSK_CONNECTED);
 		spref.get("FSK_INVERTED", FSK_INVERTED, FSK_INVERTED);
 		spref.get("FSK_STOPBITS", FSK_STOPBITS, FSK_STOPBITS);
+		spref.get("FSK_IDLES", fsk_idles, fsk_idles);
 		spref.get("FSK_PORT", defbuffer, "NONE", 499);
 		FSK_PORT = defbuffer;
 
